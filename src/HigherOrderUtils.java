@@ -34,9 +34,9 @@ public class HigherOrderUtils {
      * @return the item in the last index of <code>args</code>, which has the final
      * result of all the bifunctions being applied in sequence.
      */
-    public static <T> T zip(List<T> args, List<NamedBiFunction<T, T, T>> bifunctions) {
+    //public static <T> T zip(List<T> args, List<NamedBiFunction<T, T, T>> bifunctions) {
 
-    }
+    //}
 
 
     /**

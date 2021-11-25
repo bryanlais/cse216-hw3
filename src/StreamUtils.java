@@ -1,11 +1,14 @@
-import java.util.Collection;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
+import java.util.stream.Collectors;
+
+import static java.lang.Character.isUpperCase;
 
 public class StreamUtils {
 
     public static void main(String[] args) {
-        System.out.println("Hello World!");
+        List<String> test = Arrays.asList("hi","Bro","Dude");
+        Collection<String> result = capitalized(test);
+        System.out.println(result);
     }
 
     /**
@@ -15,10 +18,9 @@ public class StreamUtils {
     that start with a capital letter.
 
      */
-    public static Collection<String> capitalized(Collection<String> strings){
-
+    public static Collection<String> capitalized(Collection<String> strings) {
+        return strings.stream().filter(word -> isUpperCase(word.charAt(0))).collect(Collectors.toList());
     }
-
     /**
      * Find and return the longest <code>String</code> in a given collection of <code>String</code>s.
      *
@@ -29,9 +31,9 @@ public class StreamUtils {
      * @return the longest <code>String</code> in the given collection,
      * where ties are broken based on <code>from_start</code>.
      */
-    public static String longest(Collection<String> strings, boolean from_start){
+    //public static String longest(Collection<String> strings, boolean from_start){
 
-    }
+    //}
 
     /**
      * Find and return the least element from a collection of given elements that are comparable.
@@ -44,9 +46,9 @@ public class StreamUtils {
      * @return the least element in <code>items</code>, where ties are
      * broken based on <code>from_start</code>.
      */
-    public static <T extends Comparable<T>> T least(Collection<T> items, boolean from_start){
+  //  public static <T extends Comparable<T>> T least(Collection<T> items, boolean from_start){
 
-    }
+//    }
 
     /**
      * Flattens a map to a stream of <code>String</code>s, where each element in the list
@@ -58,8 +60,8 @@ public class StreamUtils {
      * @param <V> the type parameter of values in <code>aMap</code>.
      * @return the flattened list representation of <code>aMap</code>.
      */
-    public static <K, V> List<String> flatten(Map<K, V> aMap){
+    //public static <K, V> List<String> flatten(Map<K, V> aMap){
 
-    }
+    //}
 
 }
