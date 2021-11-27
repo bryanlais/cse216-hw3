@@ -6,12 +6,16 @@ import static java.lang.Character.isUpperCase;
 public class StreamUtils {
 
     public static void main(String[] args) {
-        List<String> strArr = Arrays.asList("bob","duh","ad");
+        /*List<String> strArr = Arrays.asList("bob","duh","ad");
         List<Integer> intArr = Arrays.asList(1,2,3,4,5,1);
         Collection<String> result = capitalized(strArr);
         String result2 = longest(strArr, true);
         int result3 = least(intArr,true);
-        System.out.println(result2);
+        HashMap<String, Integer> map = new HashMap<>();
+        map.put("vishal", 10);
+        map.put("sachin", 30);
+        map.put("vaibhav", 20);
+        System.out.println(flatten(map));*/
     }
     /**
      * @param strings: the input collection of <code>String</code>s.
@@ -62,8 +66,8 @@ public class StreamUtils {
      * @param <V> the type parameter of values in <code>aMap</code>.
      * @return the flattened list representation of <code>aMap</code>.
      */
-    //public static <K, V> List<String> flatten(Map<K, V> aMap){
-    //return aMap.entrySet().stream().map(collect(Collectors.toList());
-    //}
+    public static <K, V> List<String> flatten(Map<K, V> aMap){
+        return aMap.entrySet().stream().map(e -> e.getKey() + " -> " + e.getValue()).collect(Collectors.toList());
+    }
 
 }
