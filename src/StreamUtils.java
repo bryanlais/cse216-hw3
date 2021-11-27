@@ -6,9 +6,10 @@ import static java.lang.Character.isUpperCase;
 public class StreamUtils {
 
     public static void main(String[] args) {
-        List<String> test = Arrays.asList("hi","Bro","Dude");
+        List<String> test = Arrays.asList("hi","Bro","Dud");
         Collection<String> result = capitalized(test);
-        System.out.println(result);
+        String result2 = longest(test, true);
+        System.out.println(result2);
     }
 
     /**
@@ -31,9 +32,9 @@ public class StreamUtils {
      * @return the longest <code>String</code> in the given collection,
      * where ties are broken based on <code>from_start</code>.
      */
-    //public static String longest(Collection<String> strings, boolean from_start){
-
-    //}
+    public static String longest(Collection<String> strings, boolean from_start){
+        return from_start ? strings.stream().max(Comparator.comparingInt(String::length)).get() : strings.stream().sorted(Collections.reverseOrder()).max(Comparator.comparingInt(String::length)).get();
+    }
 
     /**
      * Find and return the least element from a collection of given elements that are comparable.
