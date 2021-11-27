@@ -6,12 +6,13 @@ import static java.lang.Character.isUpperCase;
 public class StreamUtils {
 
     public static void main(String[] args) {
-        List<String> test = Arrays.asList("hi","Bro","Dud");
-        Collection<String> result = capitalized(test);
-        String result2 = longest(test, true);
+        List<String> strArr = Arrays.asList("bob","duh","ad");
+        List<Integer> intArr = Arrays.asList(1,2,3,4,5,1);
+        Collection<String> result = capitalized(strArr);
+        String result2 = longest(strArr, false);
+        int result3 = least(intArr,true);
         System.out.println(result2);
     }
-
     /**
      * @param strings: the input collection of <code>String</code>s.
      * @return a collection of those <code>String</code>s in the input collection
@@ -47,9 +48,9 @@ public class StreamUtils {
      * @return the least element in <code>items</code>, where ties are
      * broken based on <code>from_start</code>.
      */
-  //  public static <T extends Comparable<T>> T least(Collection<T> items, boolean from_start){
-
-//    }
+    public static <T extends Comparable<T>> T least(Collection<T> items, boolean from_start){
+        return from_start ? Collections.min(items) : Collections.min(items.stream().sorted(Collections.reverseOrder()).collect(Collectors.toList()));
+    }
 
     /**
      * Flattens a map to a stream of <code>String</code>s, where each element in the list
