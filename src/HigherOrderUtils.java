@@ -1,6 +1,7 @@
 import java.util.Arrays;
 import java.util.List;
 import java.util.function.BiFunction;
+import java.util.function.Function;
 
 public class HigherOrderUtils {
 
@@ -56,11 +57,14 @@ public class HigherOrderUtils {
         }
     }
 
-
     public static void main(String[] args){
-        List<Double> argz = Arrays.asList(1d,1d,3d,0d,4d);
+        /*List<Double> argz = Arrays.asList(1d,1d,3d,0d,4d);
         List<NamedBiFunction<Double,Double,Double>> a = Arrays.asList(new add(), new multiply(), new add(), new divide());
         zip(argz, a);
+        Function<String, Character> f = x -> x.charAt(0);
+        Function<Character, Integer> g = x -> (int) x ;
+        Function test = new FunctionComposition<Character,String,Integer>().composition.apply(f,g);
+        System.out.println(test.apply("b"));*/
     }
 
     /**
@@ -86,15 +90,13 @@ public class HigherOrderUtils {
     public static <T> T zip(List<T> args, List<NamedBiFunction<T, T, T>> bifunctions) {
         for(int i = 0; i < bifunctions.size(); i++){
             args.set(i+1,bifunctions.get(i).apply(args.get(i),args.get(i+1)));
-            System.out.println(args);
         }
-        System.out.println("Final value: " + args.get(args.size()-1));
         return args.get(args.size()-1);
     }
 
 
     /**
-     8. Based on the above zip function, think about what a function composition would look like. Write a (12)
+     8. Based on the above zip function, think about what a function composition would look like. Write a
      static inner class called FunctionComposition that is parameterized by three type parameters. This
      class should have no methods, and no constructor. It should only have a single BiFunction called
      composition, which takes in two functions and provides their composition as the output function.
@@ -104,5 +106,10 @@ public class HigherOrderUtils {
      ‘d’ yields “dddd”, etc.), and g converts a string to its length, then composition(f, g) should output a
      function that maps ‘z’ to 26.
      **/
+
+    public static class FunctionComposition<I1,I2,R>{
+        BiFunction<Function, Function, Function> composition = (f1,f2) -> f1.andThen(f2);
+    }
+
 
 }
