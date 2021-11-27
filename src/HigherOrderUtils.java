@@ -1,17 +1,66 @@
+import java.util.Arrays;
 import java.util.List;
 import java.util.function.BiFunction;
 
 public class HigherOrderUtils {
 
-    public static interface NamedBiFunction extends BiFunction {
+    public static interface NamedBiFunction<T,U,R> extends BiFunction<T,U,R> {
+
         String name();
     }
 
+    public static class add implements NamedBiFunction<Double,Double,Double>{
+
+        public Double apply(Double a, Double b){
+            return a+b;
+        }
+
+        public String name(){
+            return "add";
+        }
+    }
+
+    public static class subtract implements NamedBiFunction<Double,Double,Double>{
+
+        public Double apply(Double a, Double b){
+            return a-b;
+        }
+
+        public String name(){
+            return "diff";
+        }
+    }
+
+    public static class multiply implements NamedBiFunction<Double,Double,Double>{
+
+        public Double apply(Double a, Double b){
+            return a * b;
+        }
+
+        public String name(){
+            return "mult";
+        }
+    }
+
+    public static class divide implements NamedBiFunction<Double,Double,Double>{
+
+        public Double apply(Double a, Double b) throws ArithmeticException{
+            if(b == 0){
+                throw new ArithmeticException();
+            }
+            return a/b;
+        }
+
+        public String name(){
+            return "div";
+        }
+    }
+
+
     public static void main(String[] args){
-        NamedBiFunction add; //Perform addition of two doubles
-        NamedBiFunction diff; //Perform subtraction of one Double from another.
-        NamedBiFunction mult; //Perform multiplication of two Doubles.
-        NamedBiFunction div; //Divides one Double from another. (Throws ArithmeticException if there is a division by zero being attempted.)
+        List<Double> argz = Arrays.asList(1d,1d,3d,0d,4d);
+        List<NamedBiFunction<Double,Double,Double>> a = Arrays.asList(new add(), new multiply(), new add(), new divide());
+        zip(argz, a);
     }
 
     /**
@@ -34,9 +83,14 @@ public class HigherOrderUtils {
      * @return the item in the last index of <code>args</code>, which has the final
      * result of all the bifunctions being applied in sequence.
      */
-    //public static <T> T zip(List<T> args, List<NamedBiFunction<T, T, T>> bifunctions) {
-
-    //}
+    public static <T> T zip(List<T> args, List<NamedBiFunction<T, T, T>> bifunctions) {
+        for(int i = 0; i < bifunctions.size(); i++){
+            args.set(i+1,bifunctions.get(i).apply(args.get(i),args.get(i+1)));
+            System.out.println(args);
+        }
+        System.out.println("Final value: " + args.get(args.size()-1));
+        return args.get(args.size()-1);
+    }
 
 
     /**

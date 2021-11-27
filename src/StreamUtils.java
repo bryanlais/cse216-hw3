@@ -9,7 +9,7 @@ public class StreamUtils {
         List<String> strArr = Arrays.asList("bob","duh","ad");
         List<Integer> intArr = Arrays.asList(1,2,3,4,5,1);
         Collection<String> result = capitalized(strArr);
-        String result2 = longest(strArr, false);
+        String result2 = longest(strArr, true);
         int result3 = least(intArr,true);
         System.out.println(result2);
     }
@@ -63,7 +63,7 @@ public class StreamUtils {
      * @return the flattened list representation of <code>aMap</code>.
      */
     //public static <K, V> List<String> flatten(Map<K, V> aMap){
-
+    //return aMap.entrySet().stream().map(collect(Collectors.toList());
     //}
 
 }
